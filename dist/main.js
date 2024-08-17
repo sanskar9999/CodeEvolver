@@ -19,11 +19,26 @@ function createPage(html) {
 }
 
 async function evolve(prompt) {
-    const { content } = await fetchGroqResponse(prompt);
-    const page = createPage(content);
-    document.getElementById('pagesContainer').appendChild(page);
-    currentPage = page;
-}
+    try {
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt }),
+      });
+      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      const page = createPage(data.content);
+      document.getElementById('pagesContainer').appendChild(page);
+      currentPage = page;
+    } catch (error) {
+      console.error('Error evolving:', error);
+      // Handle the error in UI
+    }
+  }
 
 document.getElementById('startNewBtn').addEventListener('click', () => {
     document.getElementById('start-window').style.display = 'flex';

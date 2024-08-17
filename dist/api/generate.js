@@ -1,4 +1,5 @@
 import { Groq } from "groq-sdk";
+import { systemPrompt, fullCodingPrompt } from '../../dist/defaults.js';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
