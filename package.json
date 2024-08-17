@@ -1,0 +1,13 @@
+{
+  "name": "code-evolver",
+  "version": "1.0.0",
+  "description": "Code Evolver using Groq API",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "groq-sdk": "latest"
+  },
+  "type": "module"
+}
